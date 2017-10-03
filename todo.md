@@ -20,3 +20,8 @@
 
 
 ## Frontend
+
+
+
+## Learned
+ - httpie which is a command line http client. You can hit your localhost server with your commandline. 
