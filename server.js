@@ -1,26 +1,28 @@
 var express = require("express"),
     app = express(),
     bodyParser = require("body-parser"),
+    path = require("path"),
     PORT = 8000;
 
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'client')));
+require(path.resolve('server', 'config', 'routes'))(app);
 
-// DATABASE CONNECTION, SCHEMAS AND MODELS
-var mongoose = require("mongoose");
-mongoose.connect('mongodb://localhost/full_players_teams', {useMongoClient: true});
-mongoose.Promise = global.Promise;
 
-var TeamSchema = new mongoose.Schema({
-    name: String
-});
+// SCHEMAS AND MODELS
 
-var PlayerSchema = new mongoose.Schema({
-    name: String,
-    team: { type: mongoose.Schema.Types.ObjectId, ref:'Team' }
-});
 
-var Team = mongoose.model('Team', TeamSchema);
-var Player = mongoose.model('Player', PlayerSchema);
+// var TeamSchema = new mongoose.Schema({
+//     name: String
+// });
+
+// var PlayerSchema = new mongoose.Schema({
+//     name: String,
+//     team: { type: mongoose.Schema.Types.ObjectId, ref:'Team' }
+// });
+
+// var Team = mongoose.model('Team', TeamSchema);
+// var Player = mongoose.model('Player', PlayerSchema);
 
 
 // PLAYER CONTROLLER
